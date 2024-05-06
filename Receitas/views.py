@@ -7,6 +7,5 @@ def index(request):
 
 def recipes(request, id):
 
-    print(type(id))
     context = {'recipe': make_recipe(), 'is_detail_page': True}
     return render(request, 'receitas/pages/recipes.html', context)
