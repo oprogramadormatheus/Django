@@ -17,11 +17,11 @@ class Recipe(models.Model):
     servings_unit = models.CharField(max_length=65)
     preparation_steps = models.TextField() # TEXTAREA
     preparation_steps_is_html = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True) # Atualiza a data apenas na criação
-    updated_at = models.DateTimeField(auto_now=True) # Atualiza a data toda vez que o objeto é alterado
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
     cover = models.ImageField(upload_to='Receitas/covers/%Y/%m/%d')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, default=None)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
