@@ -10,8 +10,6 @@
         </h2>
     </div>
     <div class="recipe-author">
-
-        
         <span class="recipe-author-item">
             <i class="fas fa-user"></i>
             {% if recipe.author is not None %}
@@ -24,14 +22,10 @@
             <span>Desconhecido</span>
             {% endif %}
         </span>
-        
-
-
         <span class="recipe-author-item">
             <i class="fas fa-calendar-alt"></i>
             <span>{{ recipe.created_at|date:"d/m/Y" }}</span> 
         </span>
-
         {% if recipe.category is not None %}
         <span class="recipe-author-item">
             <a href="{% url 'recipes:category' recipe.category.id %}">
@@ -40,7 +34,6 @@
             </a>
         </span>
         {% endif %}
-
     </div>
     <div class="recipe-content">
         <p>{{ recipe.description }}</p>
@@ -65,7 +58,11 @@
     {% endif %}
     {% if is_detail_page is True %}
     <div class="preparation-steps">
+        {% if recipe.preparation_steps_is_html is True %}
+        {{ recipe.preparation_steps|safe }}
+        {% else %}
         {{ recipe.preparation_steps|linebreaksbr }}
+        {% endif %}
     </div>
     {% endif %}
 </div>

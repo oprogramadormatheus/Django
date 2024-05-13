@@ -41,6 +41,8 @@
 
     --spacing-gutter-medium: 3rem;
     --spacing-gutter-large: 4rem;
+
+    --default-font-size: 62.5% /* 1 REM = 10 PX */
 }
 *{
     margin: 0;
@@ -210,6 +212,20 @@ h1, h2,h3,h4,h5,h6{
 }
 .preparation-steps{
     padding: var(--spacing-gutter-medium);
+}
+.preparation-steps h1,
+.preparation-steps h2,
+.preparation-steps h3,
+.preparation-steps h4,
+.preparation-steps h5,
+.preparation-steps h6,
+.preparation-steps p{
+    margin: 2rem 0;
+}
+.preparation-steps ol,
+.preparation-steps ul{
+    margin: 2rem;
+    padding: 0 2rem;
 }
 
 /* Rodapé */
