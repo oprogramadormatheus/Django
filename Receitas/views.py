@@ -4,13 +4,13 @@ from utils.recipes.factory import make_recipe
 
 def index(request):
 
-    recipes = models.Recipe.objects.filter(is_published=True).order_by('-id')
+    recipes = get_list_or_404(models.Recipe.objects.filter(is_published=True).order_by('-id'))
     context  = {'recipes': recipes}
     return render(request, 'receitas/pages/index.html', context)
 
 def recipes(request, id):
 
-    recipe = models.Recipe.objects.filter(pk=id, is_published=True).first()
+    recipe = get_object_or_404(models.Recipe, pk=id, is_published=True)
     context = {'recipe': recipe, 'is_detail_page': True}
     return render(request, 'receitas/pages/recipes.html', context)
 
