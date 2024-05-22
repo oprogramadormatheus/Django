@@ -8,4 +8,3 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     ...
-
