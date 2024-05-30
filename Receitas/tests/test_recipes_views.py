@@ -2,9 +2,6 @@ from Receitas import views
 from django.test import TestCase
 from django.urls import reverse, resolve
 
-# reverse: reverte uma url abstrata em uma url real
-# resolve: mostra qual função e outros atributos estão por trás dessa url
-
 class ReceitasViewsTest(TestCase):
 
     def test_recipes_index_view_function_is_correct(self):
