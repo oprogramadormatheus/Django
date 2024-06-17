@@ -13,7 +13,7 @@ class ReceitasTestBase(TestCase):
     def create_author(self, username='matheus.ricardo', first_name='Matheus', last_name='Ricardo', password='12345678'):
         return User.objects.create_user(username=username, first_name = first_name, last_name = last_name,  password=password)
 
-    def create_recipe(self, category_data=None, author_data=None):
+    def create_recipe(self, is_published=True, category_data=None, author_data=None):
 
         if category_data is None:
             category_data = {}
@@ -33,5 +33,5 @@ class ReceitasTestBase(TestCase):
             servings_unit = 'Pessoas',
             preparation_steps = 'Test Preparation Steps',
             preparation_steps_is_html = False,
-            is_published = True,
+            is_published = is_published,
         )

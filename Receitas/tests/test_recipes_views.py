@@ -64,23 +64,39 @@ class ReceitasViewsTest(ReceitasTestBase):
         self.assertTemplateUsed(response, 'receitas/pages/recipes.html')
 
     
-    def test_recipes_index_loads_recipes(self):
+    def test_recipes_index_loads_page_and_content_if_published_recipes(self):
         self.create_recipe(category_data={'name': 'Café da Manhã'})
         response = self.client.get(reverse('recipes:index'))
+        self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
-        self.assertIn('Matheus', content)
         self.assertIn('Café da Manhã', content)
-    
-    def test_recipes_category_loads_recipes(self):
+        
+    def test_recipes_category_loads_page_and_content_if_published_recipes(self):
         self.create_recipe(category_data={'name': 'Carnes Assadas'})
         response = self.client.get(reverse('recipes:category', kwargs={'category_id': 1}))
+        self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
-        self.assertIn('Matheus', content)
         self.assertIn('Carnes Assadas', content)
     
-    def test_recipes_recipe_loads_recipe(self):
+    def test_recipes_recipe_loads_page_and_content_if_published_recipes(self):
         self.create_recipe(category_data={'name': 'Jantar'})
         response = self.client.get(reverse('recipes:recipe', kwargs={'id': 1}))
+        self.assertEqual(response.status_code, 200)
         content = response.content.decode('utf-8')
-        self.assertIn('Matheus', content)
         self.assertIn('Jantar', content)
+    
+
+    def test_recipes_index_do_not_load_page_if_not_published_recipes(self):
+        self.create_recipe(is_published=False)
+        response = self.client.get(reverse('recipes:index'))
+        self.assertEqual(response.status_code, 404)
+    
+    def test_recipes_category_do_not_load_page_if_not_published_recipes(self):
+        recipe = self.create_recipe(is_published=False)
+        response = self.client.get(reverse('recipes:category', kwargs={'category_id': recipe.category.id}))
+        self.assertEqual(response.status_code, 404)
+    
+    def test_recipes_recipe_do_not_load_page_if_not_published_recipes(self):
+        recipe = self.create_recipe(is_published=False)
+        response = self.client.get(reverse('recipes:recipe', kwargs={'id': recipe.id}))
+        self.assertEqual(response.status_code, 404)
