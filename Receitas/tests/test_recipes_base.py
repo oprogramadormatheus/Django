@@ -26,7 +26,7 @@ class ReceitasTestBase(TestCase):
             author = self.create_author(**author_data),
             title = 'Test Title',
             description = 'Test Description',
-            slug = '',
+            slug = 'slug-test',
             preparation_time = 10,
             preparation_time_unit = 'Minutos',
             servings = 5,

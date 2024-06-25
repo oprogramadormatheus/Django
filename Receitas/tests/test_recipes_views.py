@@ -1,11 +1,9 @@
-from unittest import skip
 from Receitas import views
 from django.urls import reverse, resolve
 from .test_recipes_base import ReceitasTestBase
 
 class ReceitasViewsTest(ReceitasTestBase):
 
-    @skip('WIP')
     def test_recipes_index_view_function_is_correct(self):
         view = resolve(reverse('recipes:index'))
         self.assertIs(view.func, views.index)
