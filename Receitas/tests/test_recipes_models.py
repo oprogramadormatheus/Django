@@ -26,7 +26,7 @@ class ReceitasModelsTest(ReceitasTestBase):
         recipe_test.full_clean()
         recipe_test.save()
         return recipe_test
-
+    
     @skip('WIP')
     def test_recipe_title_field_max_length(self):
         self.recipe.title = 'A' * 70
@@ -46,3 +46,21 @@ class ReceitasModelsTest(ReceitasTestBase):
     def test_recipe_is_published_is_false_by_default(self):
         recipe_test = self.create_recipe_no_defaults()
         self.assertFalse(recipe_test.is_published)
+
+    def test_recipe_string_representation(self):
+        needed = 'Testing Representation'
+        self.recipe.title = 'Testing Representation'
+        self.recipe.full_clean()
+        self.recipe.save()
+        self.assertEqual(str(self.recipe), needed, 
+            msg=f'Recipe string representation should be "{needed}", but was "{str(self.recipe)}"')
+    
+    def test_recipe_category_model_string_representation(self):
+        self.category = self.create_category(name='Category Testing')
+        self.assertEqual(str(self.category), self.category.name)
+    
+    def test_recipe_category_model_name_field_max_length(self):
+        name = 'A' * 70
+        self.category = self.create_category(name=name)
+        with self.assertRaises(ValidationError):
+            self.category.full_clean()
