@@ -9,14 +9,14 @@ class ReceitasModelsTest(ReceitasTestBase):
         self.recipe = self.create_recipe()
         return super().setUp()
     
-    def create_recipe_no_defaults(self):
+    def create_recipe_no_defaults(self, slug):
 
         recipe_test = Recipe.objects.create(
             category = self.create_category(name='Test Default Category'),
             author = self.create_author(username='test.user'),
             title = 'Test Title',
             description = 'Test Description',
-            slug = 'slug-test',
+            slug = slug,
             preparation_time = 10,
             preparation_time_unit = 'Minutos',
             servings = 5,
@@ -40,11 +40,11 @@ class ReceitasModelsTest(ReceitasTestBase):
             self.recipe.full_clean()
 
     def test_recipe_preparation_steps_is_html_if_false_by_default(self):
-        recipe_test = self.create_recipe_no_defaults()
+        recipe_test = self.create_recipe_no_defaults('slug-test-1')
         self.assertFalse(recipe_test.preparation_steps_is_html)
 
     def test_recipe_is_published_is_false_by_default(self):
-        recipe_test = self.create_recipe_no_defaults()
+        recipe_test = self.create_recipe_no_defaults('slug-test-2')
         self.assertFalse(recipe_test.is_published)
 
     def test_recipe_string_representation(self):
