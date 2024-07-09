@@ -16,6 +16,10 @@ class ReceitasViewsTest(ReceitasTestBase):
         view = resolve(reverse('recipes:recipe', kwargs={'id': 1}))
         self.assertIs(view.func, views.recipes)
     
+    def test_recipes_search_view_function_is_correct(self):
+        view = resolve(reverse('recipes:search'))
+        self.assertIs(view.func, views.search)
+    
 
     def test_recipes_index_view_returns_200_if_recipes_found(self):
         self.create_recipe()
@@ -60,6 +64,11 @@ class ReceitasViewsTest(ReceitasTestBase):
         self.create_recipe()
         response = self.client.get(reverse('recipes:recipe', kwargs={'id': 1}))
         self.assertTemplateUsed(response, 'receitas/pages/recipes.html')
+    
+    def test_recipes_search_view_loads_correct_template(self):
+        response = self.client.get(reverse('recipes:search'))
+        self.assertTemplateUsed(response, 'receitas/pages/search.html')
+
 
     
     def test_recipes_index_loads_page_and_content_if_published_recipes(self):

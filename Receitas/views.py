@@ -19,3 +19,6 @@ def category(request, category_id):
     category = recipes[0].category.name
     context  = {'recipes': recipes, 'category': category}
     return render(request, 'receitas/pages/category.html', context)
+
+def search(request):
+    return render(request, 'receitas/pages/search.html')
