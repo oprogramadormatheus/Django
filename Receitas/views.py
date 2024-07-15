@@ -1,4 +1,5 @@
 from . import models
+from django.http import Http404
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 
 def index(request):
@@ -21,4 +22,9 @@ def category(request, category_id):
     return render(request, 'receitas/pages/category.html', context)
 
 def search(request):
+
+    search_term = request.GET.get('search')
+    if not search_term:
+        raise Http404()
+
     return render(request, 'receitas/pages/search.html')

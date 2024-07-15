@@ -49,6 +49,11 @@ class ReceitasViewsTest(ReceitasTestBase):
         response = self.client.get(reverse('recipes:recipe', kwargs={'id': 1}))
         self.assertEqual(response.status_code, 404)
     
+    def test_recipes_search_view_returns_404_if_no_search_term(self):
+        response = self.client.get(reverse('recipes:search') + '?search=test')
+        self.assertEqual(response.status_code, 404)
+
+    
     
     def test_recipes_index_view_loads_correct_template(self):
         self.create_recipe()
@@ -66,7 +71,7 @@ class ReceitasViewsTest(ReceitasTestBase):
         self.assertTemplateUsed(response, 'receitas/pages/recipes.html')
     
     def test_recipes_search_view_loads_correct_template(self):
-        response = self.client.get(reverse('recipes:search'))
+        response = self.client.get(reverse('recipes:search') + '?search=test')
         self.assertTemplateUsed(response, 'receitas/pages/search.html')
 
 
