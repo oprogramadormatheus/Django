@@ -23,8 +23,12 @@ def category(request, category_id):
 
 def search(request):
 
-    search_term = request.GET.get('search')
+    search_term = request.GET.get('search', '').strip()
     if not search_term:
         raise Http404()
+    
+    context = {
+        'search_term': search_term,
+    }
 
-    return render(request, 'receitas/pages/search.html')
+    return render(request, 'receitas/pages/search.html', context)
