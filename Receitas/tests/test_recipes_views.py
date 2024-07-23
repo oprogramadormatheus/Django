@@ -50,7 +50,7 @@ class ReceitasViewsTest(ReceitasTestBase):
         self.assertEqual(response.status_code, 404)
     
     def test_recipes_search_view_returns_404_if_no_search_term(self):
-        response = self.client.get(reverse('recipes:search') + '?search=test')
+        response = self.client.get(reverse('recipes:search'))
         self.assertEqual(response.status_code, 404)
 
     
@@ -112,3 +112,9 @@ class ReceitasViewsTest(ReceitasTestBase):
         recipe = self.create_recipe(is_published=False)
         response = self.client.get(reverse('recipes:recipe', kwargs={'id': recipe.id}))
         self.assertEqual(response.status_code, 404)
+
+    def test_recipes_search_can_find_recipe_by_title(self):
+        self.create_recipe()
+        response = self.client.get(reverse('recipes:search') + '?search=Test Title')
+        content = response.content.decode('utf-8')
+        self.assertIn('Test Title', content)
