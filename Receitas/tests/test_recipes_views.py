@@ -53,8 +53,7 @@ class ReceitasViewsTest(ReceitasTestBase):
         response = self.client.get(reverse('recipes:search'))
         self.assertEqual(response.status_code, 404)
 
-    
-    
+
     def test_recipes_index_view_loads_correct_template(self):
         self.create_recipe()
         response = self.client.get(reverse('recipes:index'))
@@ -75,7 +74,6 @@ class ReceitasViewsTest(ReceitasTestBase):
         self.assertTemplateUsed(response, 'receitas/pages/search.html')
 
 
-    
     def test_recipes_index_loads_page_and_content_if_published_recipes(self):
         self.create_recipe(category_data={'name': 'Café da Manhã'})
         response = self.client.get(reverse('recipes:index'))
@@ -118,3 +116,9 @@ class ReceitasViewsTest(ReceitasTestBase):
         response = self.client.get(reverse('recipes:search') + '?search=Test Title')
         content = response.content.decode('utf-8')
         self.assertIn('Test Title', content)
+    
+    def test_recipes_index_not_show_pagination_if_not_recipes_has_other_pages(self):
+        self.create_recipe()
+        response = self.client.get(reverse('recipes:index'))
+        content = response.content.decode('utf-8')
+        self.assertNotIn('pagination-content', content)
