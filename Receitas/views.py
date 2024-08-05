@@ -2,6 +2,7 @@ import os
 from . import models
 from django.db.models import Q
 from django.http import Http404
+from django.contrib import messages
 from .sources.pagination import create_pagination
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 
@@ -11,6 +12,10 @@ def index(request):
 
     recipes = get_list_or_404(models.Recipe.objects.filter(is_published=True).order_by('-id'))
     page_obj, pagination_range = create_pagination(request, recipes, PER_PAGE)
+
+    messages.success(request, 'Sucesso')
+    messages.info(request, 'Informação')
+    messages.error(request, 'Erro')
 
     context  = {
         'recipes': page_obj,
