@@ -13,10 +13,6 @@ def index(request):
     recipes = get_list_or_404(models.Recipe.objects.filter(is_published=True).order_by('-id'))
     page_obj, pagination_range = create_pagination(request, recipes, PER_PAGE)
 
-    messages.success(request, 'Sucesso')
-    messages.info(request, 'Informação')
-    messages.error(request, 'Erro')
-
     context  = {
         'recipes': page_obj,
         'pagination_range': pagination_range
