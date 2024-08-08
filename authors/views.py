@@ -2,8 +2,12 @@ from . import forms
 from django.shortcuts import render
 
 def register_view(request):
-    form = forms.RegisterForm()
-    
+
+    if request.POST:
+        form = forms.RegisterForm(request.POST)
+    else:
+        form = forms.RegisterForm()
+
     context = {
         'form': form
     }
