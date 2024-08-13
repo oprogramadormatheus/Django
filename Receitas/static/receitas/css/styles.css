@@ -276,6 +276,37 @@ h1, h2, h3, h4, h5, h6{
     background: var(--color-debug-light);
     color: var(--color-debug-dark);
 }
+.form-content{
+    max-width: 64rem;
+    margin: 0 auto;
+    margin-bottom: var(--spacing-gutter-medium);
+}
+.form-content label, .form-content .help-text, .errorlist{
+    display: block;
+    margin: 0.5rem 0;
+    font-size: 1.4rem;
+    list-style: none;
+}
+.errorlist{
+    color: var(--color-error-dark);
+}
+.form-content input{
+    width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 0.2rem solid var(--color-primary-dark);
+}
+.form-content-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: calc(var(--spacing-gutter-medium) / 2);
+}
+.form-content button{
+    padding: 1rem 2rem;
+    border: none;
+    color: var(--color-white);
+    background: var(--color-primary-dark);
+}
 @media (max-width: 600px){
     .main-content-list{
         grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
