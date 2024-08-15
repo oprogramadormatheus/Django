@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 class RegisterForm(forms.ModelForm):
 
@@ -7,16 +8,19 @@ class RegisterForm(forms.ModelForm):
         required=True,
         widget=forms.PasswordInput(attrs={
             'placeholder': 'Repita sua senha',
-            'class': 'password-input',
         }),
-        help_text='A senha deve ser igual a que você digitou anteriormente'
+        help_text='A senha deve ser igual a que você digitou anteriormente',
     )
 
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email', 'password']
         labels = {
-            'password2': 'Confirme sua senha'
+            'first_name': 'Nome',
+            'last_name': 'Sobrenome',
+            'email': 'Email',
+            'password': 'Senha',
+            'password2': 'Confirmar Senha'
         }
         widgets = {
             'username': forms.TextInput(attrs={
@@ -26,3 +30,14 @@ class RegisterForm(forms.ModelForm):
                 'placeholder': 'Crie uma senha',
             })
         }
+
+    def clean(self):
+
+        password = self.cleaned_data.get('password')
+        password2 = self.cleaned_data.get('password2')
+
+        if password != password2:
+            raise ValidationError({
+                'password': 'Password and Password2 must be equal',
+                'password2': 'Password and Password2 must be equal',
+            })
