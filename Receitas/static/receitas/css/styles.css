@@ -62,6 +62,9 @@ h1, h2, h3, h4, h5, h6{
     margin: 0 auto;
     padding: var(--spacing-gutter-medium);
 }
+.center{
+    text-align: center;
+}
 .main-logo{
     width: fit-content;
     margin: 0 auto;
@@ -168,7 +171,6 @@ h1, h2, h3, h4, h5, h6{
 .recipe-author a:hover{
     color: var(--color-primary);
 }
-
 .recipe-meta-container{
     display: flex;
     flex-flow: row wrap;
@@ -281,20 +283,17 @@ h1, h2, h3, h4, h5, h6{
     margin: 0 auto;
     margin-bottom: var(--spacing-gutter-medium);
 }
-.form-content label, .form-content .help-text, .errorlist{
+.form-content label{
     display: block;
     margin: 0.5rem 0;
     font-size: 1.4rem;
     list-style: none;
 }
-.errorlist{
-    color: var(--color-error-dark);
-}
 .form-content input{
     width: 100%;
     padding: 1rem;
-    border-radius: 1rem;
-    border: 0.2rem solid var(--color-primary-dark);
+    border-radius: 0.5rem;
+    border: 0.2rem solid var(--color-black);
 }
 .form-content-grid{
     display: grid;
@@ -302,8 +301,10 @@ h1, h2, h3, h4, h5, h6{
     gap: calc(var(--spacing-gutter-medium) / 2);
 }
 .form-content button{
+    width: 100%;
     padding: 1rem 2rem;
     border: none;
+    cursor: pointer;
     color: var(--color-white);
     background: var(--color-primary-dark);
 }
