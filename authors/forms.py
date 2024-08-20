@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 
 class RegisterForm(forms.ModelForm):
 
-    email = forms.CharField(required=False)
+    email = forms.CharField(required=False, label='Email')
 
     class Meta:
         model = User
@@ -12,16 +12,13 @@ class RegisterForm(forms.ModelForm):
         labels = {
             'first_name': 'Nome',
             'last_name': 'Sobrenome',
-            'email': 'Email',
+            'username': 'Usuário',
             'password': 'Senha',
         }
         widgets = {
-            'username': forms.TextInput(attrs={
-                'placeholder': 'Crie um usuário',
-            }),
-            'password': forms.PasswordInput(attrs={
-                'placeholder': 'Crie uma senha',
-            }),
+            'first_name': forms.TextInput(attrs={'placeholder': 'Ex: Matheus'}),
+            'last_name': forms.TextInput(attrs={'placeholder': 'Ex: Oliveira'}),
+            'username': forms.TextInput(attrs={'placeholder': 'Ex: matheus.oliveira'}),
         }
 
     def clean(self):
