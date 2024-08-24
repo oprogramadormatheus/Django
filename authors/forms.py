@@ -20,10 +20,19 @@ class RegisterForm(forms.ModelForm):
             'last_name': forms.TextInput(attrs={'placeholder': 'Ex: Oliveira'}),
             'username': forms.TextInput(attrs={'placeholder': 'Ex: matheus.oliveira'}),
         }
-
+    
     def clean(self):
 
+        username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
+
+        username_existis = User.objects.filter(username=username).exists()
+
+        if username_existis:
+            raise ValidationError({
+                'Nome de usuário indisponível',
+            })
+        
         if len(password) < 10:
             raise ValidationError({
                 'A senha deve ter no mínimo 10 caracteres',
