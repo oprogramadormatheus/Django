@@ -1,5 +1,5 @@
 from unittest import TestCase
-from recipes.sources.pagination import create_pagination_range
+from sources.pagination import create_pagination_range
 
 class PaginationTest(TestCase):
 

@@ -3,7 +3,7 @@ from . import models
 from django.db.models import Q
 from django.http import Http404
 from django.contrib import messages
-from .sources.pagination import create_pagination
+from sources.pagination import create_pagination
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 
 PER_PAGE = int(os.environ.get('PER_PAGE', 6))
